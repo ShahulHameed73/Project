@@ -1,3 +1,4 @@
+// 
 import React, { useEffect, useState } from 'react';
 
 function FacebookLoginComponent() {
@@ -7,7 +8,7 @@ function FacebookLoginComponent() {
         // Initialize the SDK
         window.fbAsyncInit = function() {
             FB.init({
-                appId: '417694421218607', // Replace with your Facebook App ID
+                appId: '549356707713722', // Replace with your Facebook App ID
                 cookie: true,
                 xfbml: true,
                 version: 'v12.0' // Replace with the current version of your API

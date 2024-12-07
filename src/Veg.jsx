@@ -3,6 +3,7 @@ import { addToCart } from "./store";
 
 function Veg(){
     const vegProducts = useSelector(state => state.products.veg)
+    
     const dispatch = useDispatch()
     const items = vegProducts.map((product,index)=>
     <li  key ={index}>

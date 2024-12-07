@@ -12,41 +12,47 @@ import { FaCarrot, FaDrumstickBite, FaHistory, FaHome, FaInfoCircle, FaPhone, Fa
 import GoogleLoginComponent from "./GoogleLoginComponent";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import FacebookLoginComponent from "./FaceBookLoginComponent";
+import GitHubLoginButton from "./Login";
 
-
+// Define App component
 function App() {
-  const cart = useSelector((state) => state.cart); 
-const totalItems = cart.reduce ((sum,item)=> sum + item.quantity,0);
+  const cart = useSelector((state) => state.cart);
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <>
-    <GoogleOAuthProvider clientId="952691513091-bkvrcq4gfut4crf7h2k27qpjrjhsbvjt.apps.googleusercontent.com">
-<GoogleLoginComponent/>
-</GoogleOAuthProvider>
-<FacebookLoginComponent/>
-     <BrowserRouter>
-     <nav>
-          <Link to="/home">  Home  <FaHome /> </Link>
-          <Link to="/veg">Veg <FaCarrot/></Link>
-          <Link to="/nonveg">      NonVeg    <FaDrumstickBite/></Link>
-          <Link to="/cart">       Cart{totalItems} <FaShoppingCart/></Link>
-          <Link to="/purchaseHistory">     PurchaseHistory <FaHistory/> </Link>
-          <Link to="/contactUs">           ContactUs <FaPhone/></Link>
-          <Link to="/aboutUs">AboutUs <FaInfoCircle/></Link>
-          </nav>
-      
-    
+      <GoogleOAuthProvider clientId="952691513091-bkvrcq4gfut4crf7h2k27qpjrjhsbvjt.apps.googleusercontent.com">
+        {/* Google Login Component */}
+        <div className="login-container">
+          <h3>Login With</h3>
+          <GoogleLoginComponent />
+          <FacebookLoginComponent /><GitHubLoginButton />
+        </div>
+      </GoogleOAuthProvider>
+
+      {/* Rest of the app */}
+      <BrowserRouter>
+        <nav>
+          <Link to="/home"> <FaHome /> Home</Link>
+          <Link to="/veg"><FaCarrot /> Veg </Link>
+          <Link to="/nonveg"><FaDrumstickBite /> NonVeg</Link>
+          <Link to="/cart"><FaShoppingCart /> Cart{totalItems}</Link>
+          <Link to="/purchaseHistory"><FaHistory /> PurchaseHistory</Link>
+          <Link to="/aboutUs"><FaInfoCircle /> AboutUs</Link>
+          <Link to="/contactUs"> <FaPhone /> ContactUs</Link>
+  
+        </nav>
+
         <Routes>
           <Route path="/home" element={<Home />} />
           <Route path="/veg" element={<Veg />} />
           <Route path="/nonveg" element={<NonVeg />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/purchaseHistory" element={<PurchaseHistory />} />
-          <Route path="/contactUs" element={<ContactUs />} />
           <Route path="/aboutUs" element={<AboutUs />} />
+          <Route path="/contactUs" element={<ContactUs />} />
         </Routes>
       </BrowserRouter>
-    
-     
     </>
   );
 }

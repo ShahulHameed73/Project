@@ -1,6 +1,7 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { configureStore, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios';
 
-// Slice for the products
+// Async action to fetch products from API
 const productsSlice = createSlice({
   name: "products",
   initialState: {
@@ -54,12 +55,38 @@ const cartSlice = createSlice({
     },
   },
 });
+
+
+// Purchase History Slice
+const purchaseHistorySlice = createSlice({
+  name: 'purchaseHistory',
+  initialState: [],
+  reducers: {
+    addPurchase: (state, action) => {
+      state.push(action.payload);
+    }
+  }
+});
+
+// Configure store
 const store = configureStore({
   reducer: {
     products: productsSlice.reducer,
     cart: cartSlice.reducer,
+    purchaseHistory: purchaseHistorySlice.reducer
   },
 });
-export const {addToCart,removeFromCart,incrementQuantity,decrementQuantity,clearCart,} = cartSlice.actions;
 
+// Export actions
+export const { 
+  addToCart, 
+  removeFromCart, 
+  incrementQuantity, 
+  decrementQuantity, 
+  clearCart 
+} = cartSlice.actions;
+
+export const { addPurchase } = purchaseHistorySlice.actions;
+
+// Export store
 export default store;
